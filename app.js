@@ -4,8 +4,19 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var cors = require('cors');
+var dbconfig = require('./config/db');
 
-var routes = require('./routes');
+mongoose.connect(dbconfig.url);
+
+mongoose.connection.on('connected', () => {
+    console.log("Connected to database " + dbconfig.url);
+});
+
+mongoose.connection.on('error', (err) => {
+    console.log("Database error: " + err);
+});
 
 var app = express();
 
@@ -13,14 +24,15 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(cors());
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
+
+var routes = require('./routes');
 app.use('/', routes);
 
 // catch 404 and forward to error handler

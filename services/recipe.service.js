@@ -1,13 +1,17 @@
- var { recipeDb } = require('../db');
+ var { Recipe } = require('../models');
 
- var { addRecipe } = recipeDb;
-
-const createRecipe = async () => {
+const createRecipe = async (body) => {
     try { 
-        return await addRecipe();
+        var recipe = new Recipe( {
+            name: body.name,
+            author: body.author,
+            servingSize: body.servingSize,
+        });
+        var result = await recipe.save();
     } catch (e) {
         throw new Error(e.message);
     };
+    return;
 }
 
 module.exports = { createRecipe };

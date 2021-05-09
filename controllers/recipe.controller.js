@@ -2,13 +2,14 @@ const { recipeService } = require('../services');
 
 const { createRecipe } = recipeService;
 
-const postRecipe = async (req, res) => {
+const postRecipe = async (req, res, next) => {
     try {
-        await createRecipe();
-        return res.sendStatus(201);
+        await createRecipe(req.body);
+        res.sendStatus(201);
+       // next();
     } catch (e) {
         console.log(e.message);
-        return res.sendStatus(500);
+        res.sendStatus(500);
     }
 }
 
