@@ -1,13 +1,13 @@
-#Recipe Project
+# Recipe Project
 
-Playing around with a recipe application to learn some new tools.
+### Playing around with a recipe application to learn some new tools.
 
-Current progress:
+#### Current progress:
     Learned about MVC architecture
     Set up skeleton Express project
     Set up a MongoDB database
     Completed the C in CRUD.
 
 
-Next:
+#### Next:
     RUD in CRUD.
