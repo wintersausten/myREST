@@ -9,6 +9,11 @@ router.get('/', function(req, res, next) {
 });
 
 /* Recipe CRUD */
-router.post('/recipe', recipe.postRecipe);
+router.post('/recipe', recipe.postRecipe); /* Add recipe */
+router.get('/recipe', recipe.getAllRecipes); /* Get all recipes */
+router.get('/recipe/:name', recipe.getRecipe); /* Get single recipe by name */
+router.put('/recipe/:name', recipe.updateRecipe); /* Update recipe by name */
+router.delete('/recipe/:name', recipe.deleteRecipe); /* Delete recipe by name */
+
 
 module.exports = router;
